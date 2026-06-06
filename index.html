@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strengthening the Stakes | The Rock Church — Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #1A3A5C;
+  --gold:   #C17F2A;
+  --blue:   #2E75B6;
+  --dark:   #374151;
+  --muted:  #6B7280;
+  --light:  #EEF3F8;
+  --lgold:  #FFF8EC;
+  --border: #E5E9EF;
+  --white:  #FFFFFF;
+  --green:  #1A5C3A;
+  --header-h: 60px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Inter', system-ui, sans-serif; color: var(--dark); background: #F7F8FA; line-height: 1.75; }
+
+/* ── PROGRESS ─────────────────────────────────────────────── */
+#progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--blue)); width: 0%; z-index: 9999; transition: width .1s; }
+
+/* ── HEADER ───────────────────────────────────────────────── */
+#site-header {
+  position: fixed; top: 3px; left: 0; right: 0; height: var(--header-h);
+  background: var(--navy); display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem; z-index: 1000; box-shadow: 0 2px 12px rgba(26,58,92,.35);
+}
+.header-brand { display: flex; align-items: center; gap: .75rem; }
+.header-logo {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: .9rem; font-weight: 700; color: white;
+}
+.header-title { color: white; font-size: .85rem; font-weight: 500; line-height: 1.3; }
+.header-title span { color: var(--gold); display: block; font-size: .7rem; font-weight: 400; margin-top: 1px; }
+.header-badge {
+  font-size: .65rem; font-weight: 600; letter-spacing: .08em; color: var(--gold);
+  border: 1px solid rgba(193,127,42,.4); border-radius: 20px; padding: .2rem .6rem;
+}
+#menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; background: none; border: none; padding: 4px; }
+#menu-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; }
+
+/* ── NAV TABS ─────────────────────────────────────────────── */
+#tab-nav {
+  position: fixed; top: calc(var(--header-h) + 3px); left: 0; right: 0;
+  background: white; border-bottom: 1px solid var(--border);
+  display: flex; overflow-x: auto; z-index: 900;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+#tab-nav::-webkit-scrollbar { display: none; }
+#tab-nav a {
+  flex-shrink: 0; padding: .75rem 1.1rem;
+  font-size: .78rem; font-weight: 500; color: var(--muted);
+  text-decoration: none; border-bottom: 2px solid transparent;
+  white-space: nowrap; transition: all .15s;
+}
+#tab-nav a:hover { color: var(--navy); }
+#tab-nav a.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.tab-nav-h { height: 42px; }
+
+/* ── HERO ─────────────────────────────────────────────────── */
+#hero {
+  background: linear-gradient(150deg, #0D1F36 0%, var(--navy) 55%, #1E4A7A 100%);
+  min-height: 88vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: calc(var(--header-h) + 3px + 42px + 4rem) 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(193,127,42,.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 75% 30%, rgba(46,117,182,.08) 0%, transparent 60%);
+}
+.hero-tag { font-size: .7rem; font-weight: 600; letter-spacing: .16em; color: var(--gold); text-transform: uppercase; margin-bottom: .75rem; background: rgba(193,127,42,.12); padding: .3rem .9rem; border-radius: 20px; display: inline-block; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 700; color: white; line-height: 1.1; margin-bottom: .75rem; }
+.hero-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2.2vw, 1.35rem); color: #93B4D0; font-style: italic; margin-bottom: 1.75rem; }
+.hero-rule { width: 60px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 1.75rem; }
+.hero-intro { font-size: 1rem; color: rgba(255,255,255,.75); max-width: 560px; line-height: 1.8; margin-bottom: 2rem; }
+.hero-verse { font-size: .82rem; color: rgba(255,255,255,.4); font-style: italic; border-top: 1px solid rgba(255,255,255,.1); padding-top: 1.25rem; }
+
+/* ── MAIN CONTENT ─────────────────────────────────────────── */
+#main { max-width: 860px; margin: 0 auto; padding: 3rem 1.25rem 6rem; }
+
+/* ── SECTIONS ─────────────────────────────────────────────── */
+.section {
+  background: white; border-radius: 14px; padding: 2.5rem;
+  margin-bottom: 2rem; border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+  scroll-margin-top: calc(var(--header-h) + 3px + 42px + 1.5rem);
+}
+.sec-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: .5rem; }
+.sec-rule { width: 44px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 1.5rem; }
+.sec-intro { font-size: 1.02rem; color: var(--dark); line-height: 1.8; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+h2.sub { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--blue); margin: 2rem 0 .75rem; }
+p.body { margin-bottom: 1rem; line-height: 1.8; font-size: .96rem; }
+p.body:last-child { margin-bottom: 0; }
+
+/* ── PULL QUOTES ──────────────────────────────────────────── */
+.pull-quote {
+  margin: 1.5rem 0; padding: 1.1rem 1.4rem 1.1rem 1.65rem;
+  background: var(--light); border-left: 4px solid var(--gold);
+  border-radius: 0 8px 8px 0; position: relative;
+}
+.pull-quote::before { content: '\201C'; position: absolute; top: -.3rem; left: .8rem; font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); opacity: .2; line-height: 1; }
+.pull-quote p { font-family: 'Playfair Display', serif; font-size: 1.02rem; font-style: italic; color: var(--navy); font-weight: 600; line-height: 1.6; margin-bottom: .4rem; }
+.pull-quote cite { font-size: .78rem; color: var(--muted); font-style: normal; }
+.pull-quote cite::before { content: '— '; }
+
+/* ── CALLOUT ──────────────────────────────────────────────── */
+.callout { background: var(--lgold); border: 1px solid rgba(193,127,42,.2); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; padding: 1.1rem 1.4rem; margin: 1.25rem 0; }
+.callout-label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+.callout ul { list-style: none; padding: 0; }
+.callout ul li { font-size: .9rem; padding: .3rem 0 .3rem 1.25rem; position: relative; line-height: 1.55; border-bottom: 1px solid rgba(193,127,42,.15); }
+.callout ul li:last-child { border-bottom: none; }
+.callout ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
+
+/* ── TIMELINE ─────────────────────────────────────────────── */
+.timeline { position: relative; margin: 1.5rem 0; padding-left: 2rem; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(to bottom, var(--gold) 0%, var(--blue) 55%, var(--navy) 100%); border-radius: 2px; }
+.tl-item { position: relative; margin-bottom: 1rem; padding-left: 1.4rem; }
+.tl-dot { position: absolute; left: -2.37rem; top: .35rem; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); border: 2px solid white; box-shadow: 0 0 0 2px var(--gold); }
+.tl-item.t-turning .tl-dot { background: var(--green); box-shadow: 0 0 0 2px var(--green); width: 14px; height: 14px; left: -2.52rem; top: .2rem; }
+.tl-item.t-now .tl-dot { background: var(--blue); box-shadow: 0 0 0 2px var(--blue); width: 14px; height: 14px; left: -2.52rem; top: .2rem; }
+.tl-year { font-size: .68rem; font-weight: 700; letter-spacing: .09em; color: var(--gold); margin-bottom: .1rem; }
+.tl-item.t-turning .tl-year { color: var(--green); }
+.tl-item.t-now .tl-year { color: var(--blue); }
+.tl-title { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: .08rem; }
+.tl-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+.tl-legend { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 1rem; padding-top: .75rem; border-top: 1px solid var(--border); }
+.tl-leg { display: flex; align-items: center; gap: .35rem; font-size: .72rem; color: var(--muted); }
+.tl-leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── VALUES DIAGRAM ──────────────────────────────────────── */
+.values-diagram { margin: 1.25rem 0; }
+.vd-top { background: linear-gradient(135deg, var(--navy) 0%, #0D2540 100%); border-radius: 10px 10px 0 0; padding: 1.1rem 1.5rem; text-align: center; }
+.vd-top-label { font-size: .63rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.vd-top h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: white; font-weight: 700; margin-bottom: .2rem; }
+.vd-top p { font-size: .78rem; color: rgba(255,255,255,.55); font-style: italic; }
+.vd-conn { display: flex; height: 22px; margin: 0 15%; position: relative; }
+.vd-conn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+.vd-conn::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: var(--gold); }
+.vd-conn-l { position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: var(--gold); }
+.vd-conn-r { position: absolute; top: 0; right: 0; width: 2px; height: 100%; background: var(--gold); }
+.vd-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.vd-card { border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 0 0 8px 8px; padding: 1rem 1rem; text-align: center; background: white; transition: box-shadow .2s, transform .15s; }
+.vd-card:hover { box-shadow: 0 4px 16px rgba(26,58,92,.1); transform: translateY(-2px); }
+.vd-icon { font-size: 1.4rem; display: block; margin-bottom: .35rem; }
+.vd-card h4 { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
+.vd-card p { font-size: .75rem; color: var(--muted); line-height: 1.45; }
+
+/* ── 2045 VISION CARDS ──────────────────────────────────── */
+.vision-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.vision-card { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: white; transition: box-shadow .2s; }
+.vision-card:hover { box-shadow: 0 6px 24px rgba(26,58,92,.12); }
+.vc-hdr { background: linear-gradient(135deg, var(--navy) 0%, #1E4A7A 100%); padding: .8rem 1rem; display: flex; align-items: center; gap: .65rem; }
+.vc-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 700; color: white; flex-shrink: 0; font-family: 'Playfair Display', serif; }
+.vc-name { font-size: .82rem; font-weight: 600; color: white; }
+.vc-body { padding: .9rem 1rem 1rem; }
+.vc-headline { font-family: 'Playfair Display', serif; font-size: .92rem; font-style: italic; color: var(--navy); font-weight: 600; margin-bottom: .5rem; line-height: 1.4; }
+.vc-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+.vc-tag { font-size: .65rem; padding: .12rem .42rem; border-radius: 20px; background: var(--light); color: var(--navy); font-weight: 500; }
+
+/* ── THEMATIC GOAL ────────────────────────────────────────── */
+.goal-block { background: linear-gradient(135deg, var(--navy) 0%, #0D2540 100%); border-radius: 12px; padding: 2.25rem; text-align: center; margin: 1.25rem 0; }
+.goal-eyebrow { font-size: .65rem; font-weight: 700; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; margin-bottom: .9rem; }
+.goal-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; color: white; line-height: 1.15; margin-bottom: .45rem; }
+.goal-sub { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #93B4D0; font-style: italic; margin-bottom: 1rem; }
+.goal-rule { width: 50px; height: 2px; background: var(--gold); margin: 0 auto 1rem; }
+.goal-verse { font-size: .82rem; color: rgba(255,255,255,.4); font-style: italic; }
+
+/* ── OBJECTIVES ───────────────────────────────────────────── */
+.obj-item { display: flex; gap: 1.1rem; align-items: flex-start; padding: .9rem 1.1rem; border-radius: 8px; background: white; border: 1px solid var(--border); margin-bottom: .65rem; transition: box-shadow .15s, transform .15s; }
+.obj-item:hover { box-shadow: 0 4px 16px rgba(26,58,92,.1); transform: translateX(3px); }
+.obj-num { width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; font-size: .9rem; font-weight: 700; flex-shrink: 0; font-family: 'Playfair Display', serif; }
+.obj-body { flex: 1; }
+.obj-tag { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .12rem .45rem; border-radius: 20px; background: var(--light); color: var(--navy); margin-bottom: .25rem; }
+.obj-title { font-size: .92rem; font-weight: 700; color: var(--navy); margin-bottom: .18rem; }
+.obj-desc { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+/* ── QUESTION CARDS ───────────────────────────────────────── */
+.q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+.q-card { background: var(--light); border-radius: 10px; padding: 1.1rem 1.25rem; border: 1px solid rgba(26,58,92,.08); transition: box-shadow .2s; }
+.q-card:hover { box-shadow: 0 4px 16px rgba(26,58,92,.1); }
+.q-num { font-size: .72rem; font-weight: 700; color: var(--gold); margin-bottom: .35rem; }
+.q-card p { font-size: .88rem; color: var(--navy); line-height: 1.6; font-weight: 500; }
+
+/* ── CLOSING ──────────────────────────────────────────────── */
+.closing-block { background: linear-gradient(135deg, var(--navy) 0%, #0D2540 100%); border-radius: 12px; padding: 3rem 2.5rem; text-align: center; margin-top: 1.5rem; }
+.closing-quote-mark { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold); opacity: .25; line-height: .5; margin-bottom: 1.5rem; display: block; }
+.closing-block h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.55rem); font-weight: 700; color: white; font-style: italic; line-height: 1.5; margin-bottom: 1rem; }
+.closing-block p { font-size: 1rem; color: #93B4D0; font-style: italic; line-height: 1.65; margin-bottom: .6rem; }
+.closing-attr { font-size: .82rem; color: rgba(255,255,255,.4); margin-top: 1.25rem !important; }
+
+/* ── PLANNING FRAMEWORK ───────────────────────────────────── */
+.plan-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+.plan-step { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: white; }
+.plan-step-hdr { background: var(--navy); padding: .8rem 1rem; display: flex; align-items: center; gap: .65rem; }
+.plan-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: .82rem; font-weight: 700; color: white; flex-shrink: 0; }
+.plan-step-hdr h4 { font-size: .85rem; font-weight: 600; color: white; line-height: 1.3; }
+.plan-step-body { padding: .9rem 1rem 1rem; }
+.plan-step-body p { font-size: .82rem; color: var(--muted); line-height: 1.6; margin-bottom: .65rem; }
+.plan-step-body p:last-child { margin-bottom: 0; }
+.plan-step-prompt { font-size: .8rem; font-style: italic; color: var(--navy); font-weight: 500; background: var(--light); padding: .5rem .75rem; border-radius: 6px; border-left: 3px solid var(--gold); }
+
+.plan-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 1.25rem 0; }
+.ptc-hdr { padding: .75rem 1.1rem; font-size: .8rem; font-weight: 700; letter-spacing: .05em; color: white; }
+.ptc-hdr.keep { background: var(--green); }
+.ptc-hdr.build { background: var(--navy); }
+.ptc-body { padding: .75rem 1.1rem; }
+.ptc-item { font-size: .83rem; padding: .45rem 0 .45rem 1.25rem; position: relative; color: var(--dark); border-bottom: 1px solid var(--border); line-height: 1.5; }
+.ptc-item:last-child { border-bottom: none; }
+.ptc-item::before { position: absolute; left: 0; font-size: .75rem; }
+.ptc-body.keep .ptc-item::before { content: '✓'; color: var(--green); }
+.ptc-body.build .ptc-item::before { content: '+'; color: var(--gold); font-weight: 700; }
+
+.goal-template { background: var(--lgold); border: 1px solid rgba(193,127,42,.25); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+.gt-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.gt-field { margin-bottom: 1rem; }
+.gt-field:last-child { margin-bottom: 0; }
+.gt-field-label { font-size: .72rem; font-weight: 700; color: var(--navy); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .35rem; }
+.gt-field-input { background: white; border: 1px solid rgba(193,127,42,.3); border-radius: 6px; padding: .65rem .9rem; font-size: .85rem; color: var(--muted); font-style: italic; min-height: 44px; line-height: 1.5; }
+
+.plan-q-list { list-style: none; padding: 0; margin: 1rem 0; counter-reset: pq; }
+.plan-q-list li { counter-increment: pq; padding: .75rem 0 .75rem 2.25rem; position: relative; border-bottom: 1px solid var(--border); font-size: .9rem; color: var(--dark); line-height: 1.65; }
+.plan-q-list li:last-child { border-bottom: none; }
+.plan-q-list li::before { content: counter(pq); position: absolute; left: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: white; font-size: .72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; top: .9rem; }
+
+@media (max-width: 768px) {
+  .plan-steps { grid-template-columns: 1fr; }
+  .plan-two-col { grid-template-columns: 1fr; }
+}
+
+/* ── BACK TO TOP ──────────────────────────────────────────── */
+#btt { position: fixed; bottom: 2rem; right: 2rem; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: white; border: none; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(26,58,92,.3); display: none; align-items: center; justify-content: center; transition: .2s; z-index: 500; }
+#btt:hover { background: var(--gold); transform: translateY(-2px); }
+#btt.visible { display: flex; }
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+footer { background: #1E1E2E; color: rgba(255,255,255,.4); text-align: center; padding: 2rem 1rem; font-size: .78rem; }
+footer span { color: var(--gold); }
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section { padding: 1.75rem 1.25rem; }
+  .vd-row { grid-template-columns: 1fr; }
+  .q-grid { grid-template-columns: 1fr; }
+  .vision-grid { grid-template-columns: 1fr; }
+  #menu-toggle { display: flex; }
+  .closing-block { padding: 2rem 1.25rem; }
+}
+@media (max-width: 480px) {
+  .goal-block { padding: 1.75rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-brand">
+    <div class="header-logo">TRC</div>
+    <div class="header-title">
+      Strengthening the Stakes
+      <span>The Rock Church · Staff Edition · May 2026</span>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <span class="header-badge">For Staff</span>
+    <button id="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav id="tab-nav">
+  <a href="#our-story" class="active">Our Story</a>
+  <a href="#our-values">Our Values</a>
+  <a href="#the-vision">The Vision</a>
+  <a href="#this-season">This Season</a>
+  <a href="#your-role">Your Role</a>
+  <a href="#your-goal">The Goal</a>
+</nav>
+<div class="tab-nav-h"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <span class="hero-tag">The Rock Church · Staff Edition</span>
+  <h1 class="hero-title">Strengthening the Stakes</h1>
+  <p class="hero-subtitle">Creating Capacity for the Future</p>
+  <div class="hero-rule"></div>
+  <p class="hero-intro">In May 2026, the elders gathered for a two-day retreat to pray and discern what God is calling The Rock Church into next. This is what they heard — and what it means for all of us.</p>
+  <p class="hero-verse">"Enlarge the place of your tent… lengthen your cords, strengthen your stakes. Do not hold back." — Isaiah 54:2</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <!-- OUR STORY -->
+  <section class="section" id="our-story">
+    <p class="sec-eyebrow">Our Story</p>
+    <h2 class="sec-title">God Has Been Faithful</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">Before we talk about where we're going, it's important to know where we've been. The Rock Church's story is one of God's extraordinary faithfulness — through growth, through difficulty, and into what He's building now.</p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">~1998</div>
+        <div class="tl-title">Founded</div>
+        <div class="tl-desc">The Rock Church launches in Scarborough as a church plant. From the beginning, God's hand is on this place.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2010s</div>
+        <div class="tl-title">A Season of Growth</div>
+        <div class="tl-desc">The church grows into a multi-service congregation. A building campaign launches. Hundreds of lives are changed.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2020 – 2024</div>
+        <div class="tl-title">Through the Difficult Years</div>
+        <div class="tl-desc">Like many churches, The Rock faced significant challenges. Leadership changed. COVID reshaped everything. And through it all, God kept the doors open and a faithful remnant kept showing up.</div>
+      </div>
+
+      <div class="tl-item t-turning">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-title">A Turning Point</div>
+        <div class="tl-desc">Momentum begins to shift. Giving and attendance rise. Partners like Grace Point Chapel sacrifice to help the church find its footing. It is nothing short of a miracle.</div>
+      </div>
+
+      <div class="tl-item t-now">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+        <div class="tl-title">Matt Arrives</div>
+        <div class="tl-desc">New leadership. New energy. New people every Sunday. The Holy Spirit is present and active. The church is growing — and that growth is real.</div>
+      </div>
+
+      <div class="tl-item t-now">
+        <div class="tl-dot"></div>
+        <div class="tl-year">May 2026</div>
+        <div class="tl-title">The Elder Retreat — This Moment</div>
+        <div class="tl-desc">Six leaders gather to ask what God requires of us now. The answer becomes the rallying cry for the next season: <em>Strengthen Your Stakes.</em></div>
+      </div>
+
+    </div>
+    <div class="tl-legend">
+      <span class="tl-leg"><span class="tl-leg-dot" style="background:var(--gold)"></span>Foundation</span>
+      <span class="tl-leg"><span class="tl-leg-dot" style="background:var(--green)"></span>Turning Points</span>
+      <span class="tl-leg"><span class="tl-leg-dot" style="background:var(--blue)"></span>Now</span>
+    </div>
+
+    <div class="pull-quote" style="margin-top:1.75rem">
+      <p>He didn't want it to die. His hand is so evident on it. We have to tell the testimony.</p>
+      <cite>Mike, Elder</cite>
+    </div>
+
+    <p class="body" style="margin-top:1rem">The elders want the congregation to know this story. The survival and renewal of The Rock Church is not the result of great strategy — it is the evidence of God's faithfulness to a community that kept believing. And you have been part of that.</p>
+  </section>
+
+  <!-- OUR VALUES -->
+  <section class="section" id="our-values">
+    <p class="sec-eyebrow">Our Values</p>
+    <h2 class="sec-title">What We're Building On</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">The elders spent significant time during the retreat naming what The Rock Church is built on — not just what we do, but who we are. These four values came out of that conversation. They are not new rules. They are who we want to be together.</p>
+
+    <p class="body">One thing stood out above the rest: <strong>Intimacy with God is the foundation of everything else.</strong> When we are close to God, the other values flow naturally. They're not a checklist — they're the overflow of a community that genuinely knows Him.</p>
+
+    <div class="values-diagram">
+      <div class="vd-top">
+        <div class="vd-top-label">The Foundation — Everything Flows From This</div>
+        <h4>✦ Intimacy with God</h4>
+        <p>"If 20 years from now that's what people said about us, I'm good." — Matt</p>
+      </div>
+      <div class="vd-conn">
+        <div class="vd-conn-l"></div>
+        <div class="vd-conn-r"></div>
+      </div>
+      <div class="vd-row">
+        <div class="vd-card">
+          <span class="vd-icon">◎</span>
+          <h4>Truth &amp; Authenticity</h4>
+          <p>We say what we mean with kindness. We are real with each other. No pretending, no performing.</p>
+        </div>
+        <div class="vd-card">
+          <span class="vd-icon">◇</span>
+          <h4>Kingdom Mindset</h4>
+          <p>We're not building our platform — we're building God's Kingdom. Humility, partnership, and generosity define us.</p>
+        </div>
+        <div class="vd-card">
+          <span class="vd-icon">♡</span>
+          <h4>Unconditional Love</h4>
+          <p>We go into hard places with people. Love isn't conditional on comfort — it's a commitment we keep.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem">
+      <div class="callout-label">What this looks like for our team</div>
+      <ul>
+        <li>We speak the truth to each other — with kindness and care, not avoidance</li>
+        <li>We celebrate wins beyond The Rock — when other churches and ministries thrive, so do we</li>
+        <li>We go after people who are far from God, not just those who are easy to reach</li>
+        <li>We stay close to God personally — ministry flows from that closeness, not the other way around</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- THE VISION -->
+  <section class="section" id="the-vision">
+    <p class="sec-eyebrow">The Vision</p>
+    <h2 class="sec-title">Where We're Headed — 2045</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">During the retreat, each elder was asked: imagine it's 2045 — what's the headline in the Portland Press Herald about The Rock Church? What they described, independently and without coordination, was remarkably unified.</p>
+
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="vc-hdr">
+          <div class="vc-avatar">C</div>
+          <div class="vc-name">Christy</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-headline">"The Rock as a Lighthouse to the World"</div>
+          <div class="vc-tags">
+            <span class="vc-tag">Global missions</span>
+            <span class="vc-tag">Church planting</span>
+            <span class="vc-tag">Biblical worldview</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <div class="vc-hdr">
+          <div class="vc-avatar">Mi</div>
+          <div class="vc-name">Mike</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-headline">"Visible life change — not about The Rock"</div>
+          <div class="vc-tags">
+            <span class="vc-tag">Church unity</span>
+            <span class="vc-tag">Community center</span>
+            <span class="vc-tag">City partnerships</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <div class="vc-hdr">
+          <div class="vc-avatar">Su</div>
+          <div class="vc-name">Susan</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-headline">"The Rock Church is a Community Oasis"</div>
+          <div class="vc-tags">
+            <span class="vc-tag">Practical care</span>
+            <span class="vc-tag">Food &amp; health</span>
+            <span class="vc-tag">Better Together</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <div class="vc-hdr">
+          <div class="vc-avatar">Sc</div>
+          <div class="vc-name">Scott</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-headline">"Transforming a community built on love of a 2,000-year-old prophet"</div>
+          <div class="vc-tags">
+            <span class="vc-tag">Root Cellar</span>
+            <span class="vc-tag">Southern Maine</span>
+            <span class="vc-tag">Counter-cultural</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-card">
+        <div class="vc-hdr">
+          <div class="vc-avatar">Ma</div>
+          <div class="vc-name">Matt</div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-headline">"Authentic Jesus followers — developed and sent locally and globally"</div>
+          <div class="vc-tags">
+            <span class="vc-tag">Training &amp; sending</span>
+            <span class="vc-tag">New England pipeline</span>
+            <span class="vc-tag">Spirit-led</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <p>The measure of The Rock's success is not whether the organization survives. It is whether the people the church built are so woven into the city that the city would grieve their absence.</p>
+      <cite>Matt and Christy</cite>
+    </div>
+
+    <p class="body">Five themes ran through every vision story: <strong>authentic discipleship</strong> over consumer church, <strong>community impact and practical love</strong>, <strong>sending people</strong> locally and globally, <strong>unity beyond The Rock</strong> through city partnerships, and <strong>training and releasing leaders</strong> across New England. This is what we're building toward — together.</p>
+  </section>
+
+  <!-- THIS SEASON -->
+  <section class="section" id="this-season">
+    <p class="sec-eyebrow">This Season</p>
+    <h2 class="sec-title">Strengthening the Stakes</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">Isaiah 54:2 says: "Enlarge the place of your tent… lengthen your cords, strengthen your stakes. Do not hold back." God is enlarging the tent — new people, new growth, new momentum. Our job this season is to strengthen the stakes so the tent can hold.</p>
+
+    <div class="goal-block">
+      <div class="goal-eyebrow">The Rallying Cry · May – November 2026</div>
+      <div class="goal-title">Strengthening the Stakes</div>
+      <div class="goal-sub">Creating Capacity for the Future</div>
+      <div class="goal-rule"></div>
+      <div class="goal-verse">"Lengthen your cords, strengthen your stakes. Do not hold back." — Isaiah 54:2</div>
+    </div>
+
+    <h2 class="sub">What We're Building Together</h2>
+    <p class="body">The elders identified five focus areas for the next six months. These aren't just leadership priorities — they are opportunities for every one of us to contribute to something bigger.</p>
+
+    <div style="margin-top:1rem;">
+      <div class="obj-item">
+        <div class="obj-num">1</div>
+        <div class="obj-body">
+          <div class="obj-tag">Vision &amp; Story</div>
+          <div class="obj-title">Tell the Story — Cast the Vision</div>
+          <div class="obj-desc">The story of what God has done at The Rock deserves to be told widely. And the 2045 vision deserves to be known by everyone in the building. When people know where we've been and where we're going, they invest with their whole heart.</div>
+        </div>
+      </div>
+
+      <div class="obj-item">
+        <div class="obj-num">2</div>
+        <div class="obj-body">
+          <div class="obj-tag">Connection</div>
+          <div class="obj-title">Build Connection — Close the Back Door</div>
+          <div class="obj-desc">New people are arriving every Sunday. We want every single one of them to find their people here. Building small groups, next-steps pathways, and genuine community is how a crowd becomes a church family.</div>
+        </div>
+      </div>
+
+      <div class="obj-item">
+        <div class="obj-num">3</div>
+        <div class="obj-body">
+          <div class="obj-tag">Leadership</div>
+          <div class="obj-title">Develop Leaders at Every Level</div>
+          <div class="obj-desc">The growth we're experiencing creates more opportunity than we currently have leaders to fill. We're investing in finding, developing, and releasing the next tier of serve team leaders, small group leaders, and ministry coordinators — that might be you.</div>
+        </div>
+      </div>
+
+      <div class="obj-item">
+        <div class="obj-num">4</div>
+        <div class="obj-body">
+          <div class="obj-tag">Next Generation</div>
+          <div class="obj-title">Launch Student Ministry</div>
+          <div class="obj-desc">We are committed to hiring a student pastor within six months. The next generation deserves a home at The Rock — a place to belong, grow, and be sent. This is one of the most exciting things we're building.</div>
+        </div>
+      </div>
+
+      <div class="obj-item">
+        <div class="obj-num">5</div>
+        <div class="obj-body">
+          <div class="obj-tag">Team Health</div>
+          <div class="obj-title">Grow as a Healthy, Thriving Team</div>
+          <div class="obj-desc">We're investing in becoming a staff team that has clear expectations, honest feedback, and a culture where everyone can grow and thrive in their role. A healthy team builds a healthy church.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR ROLE -->
+  <section class="section" id="your-role">
+    <p class="sec-eyebrow">Your Role</p>
+    <h2 class="sec-title">You Are Part of This</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">The elders don't see this season's focus as something handed down to staff — they see it as something we build together. Every ministry area has a role to play. Every person on this team contributes to what God is doing here.</p>
+
+    <div class="q-grid">
+      <div class="q-card">
+        <div class="q-num">For Your Ministry Area</div>
+        <p>How does what you do every week contribute to Strengthening the Stakes? Where is your area growing, and what does it need to grow further?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">For Leadership Development</div>
+        <p>Is there someone in your sphere you could invest in and develop? Who around you is ready for more responsibility?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">For Connection</div>
+        <p>How could your ministry area help new people find their place at The Rock? What would it look like to actively close the back door?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">For Your Own Growth</div>
+        <p>Is your intimacy with God the source of your ministry energy right now? What would it look like to lead from that place more fully?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">For the Vision</div>
+        <p>What part of the 2045 vision excites you most? How does your role today connect to what God is building toward?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">For Sending</div>
+        <p>The Rock is becoming a place that trains and sends people — not just gathers them. How could you contribute to a culture of equipping and releasing?</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.75rem">
+      <div class="callout-label">Coming Up</div>
+      <ul>
+        <li>Matt will be bringing these elder outcomes to the full staff team — watch for that conversation</li>
+        <li>Each department will build their own thematic goal aligned to Strengthening the Stakes</li>
+        <li>Individual conversations about growth, goals, and clarity are coming — these are investments in you</li>
+        <li>The vision will be cast publicly to the congregation — you'll get to be part of telling that story</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- YOUR GOAL -->
+  <section class="section" id="your-goal">
+    <p class="sec-eyebrow">The Goal</p>
+    <h2 class="sec-title">One Goal. Every Team. Together.</h2>
+    <div class="sec-rule"></div>
+    <p class="sec-intro">There is one thematic goal for The Rock Church this season — held centrally by the elders and carried by every person on the team. It's not a department-by-department exercise. It's a shared commitment that every ministry area rallies behind.</p>
+
+    <div class="goal-block">
+      <div class="goal-eyebrow">The Church's Thematic Goal · May – November 2026</div>
+      <div class="goal-title">Strengthening the Stakes</div>
+      <div class="goal-sub">Creating Capacity for the Future</div>
+      <div class="goal-rule"></div>
+      <div class="goal-verse">"Lengthen your cords, strengthen your stakes. Do not hold back." — Isaiah 54:2</div>
+    </div>
+
+    <p class="body">The thematic goal is set centrally by the elders and carried by every person on the team. It works through a simple structure: one overarching goal, five defining objectives underneath it, and specific tasks with named owners within each objective. Your job is to understand where your work fits — and to own your part of it fully.</p>
+
+    <h2 class="sub">How the Plan Works</h2>
+
+    <div class="plan-steps">
+      <div class="plan-step">
+        <div class="plan-step-hdr">
+          <div class="plan-step-num">1</div>
+          <h4>The Thematic Goal</h4>
+        </div>
+        <div class="plan-step-body">
+          <p>One rallying cry for the whole church, held by the elders, that every person and every ministry area is moving toward together.</p>
+          <p>Everything this season gets filtered through it: does this strengthen the stakes?</p>
+          <div class="plan-step-prompt">Strengthening the Stakes — Creating Capacity for the Future</div>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-hdr">
+          <div class="plan-step-num">2</div>
+          <h4>Five Defining Objectives</h4>
+        </div>
+        <div class="plan-step-body">
+          <p>The five organizational outcomes that, together, mean the thematic goal has been achieved. These are the pillars — broad enough to cover the whole church, specific enough to be actionable.</p>
+          <p>Each objective has its own focus, its own tasks, and its own owners.</p>
+          <div class="plan-step-prompt">Scroll down to see all five objectives.</div>
+        </div>
+      </div>
+      <div class="plan-step">
+        <div class="plan-step-hdr">
+          <div class="plan-step-num">3</div>
+          <h4>Tasks with Owners</h4>
+        </div>
+        <div class="plan-step-body">
+          <p>Within each objective, specific tasks are identified and assigned to named people. This is where strategy becomes action — and where every staff member finds their specific contribution.</p>
+          <p>If you're not sure which tasks belong to you, that conversation is coming. Bring your questions to Matt.</p>
+          <div class="plan-step-prompt">Clarity on your tasks = clarity on your contribution.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sub">The Five Defining Objectives</h2>
+    <p class="body" style="margin-bottom:1rem">These are the five pillars of the thematic goal. Every staff member's work connects to at least one of them.</p>
+
+    <div style="margin-top:.5rem">
+      <div class="obj-item">
+        <div class="obj-num">1</div>
+        <div class="obj-body">
+          <div class="obj-tag">Vision &amp; Story</div>
+          <div class="obj-title">Present the Vision — Tell the Testimony</div>
+          <div class="obj-desc">Communicating what God has done at The Rock and where He is taking us. The survival story needs to be told. The 2045 vision needs to be known. When people understand both, they give their whole heart to the mission.</div>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">2</div>
+        <div class="obj-body">
+          <div class="obj-tag">Connection</div>
+          <div class="obj-title">Build Connection Infrastructure</div>
+          <div class="obj-desc">Creating the systems and pathways that turn first-time visitors into connected members of the church family — small groups, next steps, assimilation, and follow-up processes that make sure nobody slips through the cracks.</div>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">3</div>
+        <div class="obj-body">
+          <div class="obj-tag">Leadership</div>
+          <div class="obj-title">Develop the Leadership Pipeline</div>
+          <div class="obj-desc">Identifying, developing, and deploying the next tier of serve team leaders, small group leaders, and ministry coordinators. Building the mid-level leadership layer that makes a growing church sustainable — and giving people a meaningful place to belong and contribute.</div>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">4</div>
+        <div class="obj-body">
+          <div class="obj-tag">Next Generation</div>
+          <div class="obj-title">Launch Student Ministry</div>
+          <div class="obj-desc">Hiring a student pastor and building a student ministry that gives the next generation a genuine home at The Rock — a place to be known, to grow in faith, and to be equipped for a life of following Jesus.</div>
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-num">5</div>
+        <div class="obj-body">
+          <div class="obj-tag">Team Health</div>
+          <div class="obj-title">Build a Healthy, High-Functioning Team</div>
+          <div class="obj-desc">Developing the staff culture, clarity, and accountability that a growing church requires. Clear expectations, honest feedback, and an environment where every team member can thrive and grow in their role.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="sub">Where Does Your Work Fit?</h2>
+    <p class="body" style="margin-bottom:.75rem">Every staff member should be able to clearly answer this question. Use these to get there.</p>
+
+    <ol class="plan-q-list">
+      <li>Which of the five defining objectives does my work most directly contribute to — and how specifically does what I do advance it?</li>
+      <li>Are there tasks within that objective that I own or will be asked to own? Do I have the clarity I need to act?</li>
+      <li>What am I already doing well that needs to keep running at full strength while the new focus areas are built?</li>
+      <li>Is there one person in my sphere I could develop this season — someone who's ready for more responsibility?</li>
+      <li>If someone asked me in November what I did to strengthen the stakes — what do I want to be able to say?</li>
+    </ol>
+
+    <!-- CLOSING -->
+    <div class="closing-block">
+      <span class="closing-quote-mark">"</span>
+      <h3>You've been faithful. You've been building. Now — don't hold back.</h3>
+      <p>The mission is advancing. These insights are your fuel.</p>
+      <p class="closing-attr">— The Elders of The Rock Church</p>
+    </div>
+  </section>
+
+</main>
+
+<button id="btt" title="Back to top">↑</button>
+
+<footer>
+  <p>The Rock Church · Scarborough, Maine · <span>Staff Edition</span> · May 2026</p>
+  <p style="margin-top:.4rem; font-size:.7rem; opacity:.5;">From the Elder Retreat — Strengthening the Stakes · Isaiah 54:2</p>
+</footer>
+
+<script>
+var bar = document.getElementById('progress-bar');
+var btt = document.getElementById('btt');
+var sections = document.querySelectorAll('.section');
+var navLinks = document.querySelectorAll('#tab-nav a');
+var offset = 60 + 3 + 42 + 24;
+
+function updateAll() {
+  var st = window.pageYOffset;
+  var dh = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (st / dh * 100) + '%';
+  if (st > 400) btt.classList.add('visible'); else btt.classList.remove('visible');
+  var current = '';
+  sections.forEach(function(s) { if (s.offsetTop <= st + offset + 40) current = s.id; });
+  navLinks.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+}
+
+window.addEventListener('scroll', updateAll, { passive: true });
+
+btt.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+navLinks.forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var t = document.querySelector(this.getAttribute('href'));
+    if (t) window.scrollTo({ top: t.offsetTop - offset, behavior: 'smooth' });
+  });
+});
+
+updateAll();
+</script>
+</body>
+</html>
